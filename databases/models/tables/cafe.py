@@ -15,6 +15,9 @@ class Cafe(db.Model):
     can_take_calls = db.Column(db.Boolean, nullable=False)
     coffee_price = db.Column(db.String(250), nullable=True)
 
+    def __str__(self):
+        return f'{self.name} -- {self.seats}'
+
     def to_dict(self):
         # Method 1.
         dictionary = {}
@@ -31,3 +34,14 @@ class Cafe(db.Model):
     @classmethod
     def get_cafe_by_location(cls, loc):
         return cls.query.filter_by(location=loc)
+
+    @classmethod
+    def create_cafe(cls,**kwargs):
+        cafe = cls(**kwargs)
+        return cafe.save()
+
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+        return self
