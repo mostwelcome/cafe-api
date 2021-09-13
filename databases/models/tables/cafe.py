@@ -27,3 +27,7 @@ class Cafe(db.Model):
     @classmethod
     def get_cafe(cls, idx):
         return cls.query.get(idx)
+
+    @classmethod
+    def get_cafe_by_location(cls, loc):
+        return cls.query.filter_by(location=loc)
