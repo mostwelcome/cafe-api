@@ -36,12 +36,16 @@ class Cafe(db.Model):
         return cls.query.filter_by(location=loc)
 
     @classmethod
-    def create_cafe(cls,**kwargs):
+    def create_cafe(cls, **kwargs):
         cafe = cls(**kwargs)
         return cafe.save()
 
-
     def save(self):
         db.session.add(self)
+        db.session.commit()
+        return self
+
+    def delete_cafe(self):
+        db.session.delete(self)
         db.session.commit()
         return self

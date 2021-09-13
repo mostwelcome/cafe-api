@@ -14,7 +14,8 @@ def get_cafes_list():
     cafe_list = Cafe.get_cafes()
     return {'cafes': {cafe.id: cafe.to_dict() for cafe in cafe_list}}
 
-def update_cafe_coffee_price(idx,new_price):
+
+def update_cafe_coffee_price(idx, new_price):
     old_cafe = Cafe.get_cafe(idx)
     old_cafe.coffee_price = new_price
     return old_cafe.save().to_dict()
@@ -31,9 +32,6 @@ def get_cafe_by_location(location):
     return {'cafes': {cafe.id: cafe.to_dict() for cafe in cafe_list}}
 
 
-def update_cafe_details():
-    pass
-
-
-def delete_cafe_details():
-    pass
+def delete_cafe_details(idx):
+    cafe_to_delete = Cafe.get_cafe(idx)
+    return Cafe.delete_cafe(cafe_to_delete).to_dict()

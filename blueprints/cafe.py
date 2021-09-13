@@ -1,6 +1,7 @@
 from databases.models.tables.cafe import Cafe
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
-from managers.cafe import get_cafes_list, get_one_random_cafe, get_cafe_by_location, add_cafe, update_cafe_coffee_price
+from managers.cafe import get_cafes_list, get_one_random_cafe, get_cafe_by_location, add_cafe, update_cafe_coffee_price, \
+    delete_cafe_details
 
 CAFES_BLUEPRINT = Blueprint('cafes', __name__)
 
@@ -33,9 +34,9 @@ def update_price(idx=None):
     new_price = request.args.get('price')
     print(new_price)
     print(idx)
-    return update_cafe_coffee_price(idx,new_price)
+    return update_cafe_coffee_price(idx, new_price)
 
 
-@CAFES_BLUEPRINT.route('', methods=['DELETE'])
-def delete_cafe():
-    return {'m': 'delete'}
+@CAFES_BLUEPRINT.route('/<int:idx>', methods=['DELETE'])
+def delete_cafe(idx=None):
+    return delete_cafe_details(idx)
