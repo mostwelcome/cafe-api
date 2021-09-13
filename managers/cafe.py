@@ -4,7 +4,7 @@ def add_cafe():
     pass
 
 def get_cafes_list():
-    pass
+    return Cafe.get_cafe(1).to_dict()
 
 def update_cafe_details():
     pass

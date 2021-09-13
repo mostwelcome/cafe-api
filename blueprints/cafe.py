@@ -1,12 +1,12 @@
 from databases.models.tables.cafe import Cafe
 from flask import Blueprint, request, render_template, redirect, url_for, flash, session
-from managers.cafe import add_cafe
+from managers.cafe import get_cafes_list
 CAFES_BLUEPRINT = Blueprint('cafes', __name__)
 
 
 @CAFES_BLUEPRINT.route('', methods=['GET'])
 def get_cafes():
-    return {'m': 'get'}
+    return get_cafes_list()
 
 
 @CAFES_BLUEPRINT.route('', methods=['POST'])
